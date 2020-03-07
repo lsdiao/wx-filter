@@ -1,0 +1,9 @@
+<van-transition
+  name="fade"
+  show="{{ show }}"
+  custom-class="van-notify"
+  custom-style="background-color:{{ backgroundColor }}; color: {{ color }}; z-index: {{ zIndex }};top:{{CustomBar}}px"
+>
+  <view wx:if="{{ safeAreaInsetTop }}" class="van-notify__safe-top" style="padding-top: {{ statusBarHeight }}px"></view>
+  {{ text }}
+</van-transition>

@@ -1,0 +1,102 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">筛选</view>
+</cu-custom>
+<view id="swiper-tab">
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="tabNav">{{first}}
+      <text class=" {{currentTab==0 ? 'cuIcon-triangleupfill' : 'cuIcon-triangledownfill'}}  lg text-gray"></text>
+    </view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="tabNav">{{second}}
+      <text class="cuIcon-triangledownfill lg text-gray"></text>
+    </view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="tabNav">{{thirds}}
+      <text class="cuIcon-triangledownfill lg text-gray"></text>
+    </view>
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="tabNav">{{fours}}
+      <text class="cuIcon-triangledownfill lg text-gray"></text>
+    </view>
+  </view>
+  <swiper current="{{currentTab*1}}" circular duration="500" class="swiper-item" style='display:{{displays}}'>
+    <swiper-item>
+    <view class="VerticalBox">
+      <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 375rpx)">
+        <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key="item" bindtap='tabSelect' data-id="{{index}}">
+          Tab-{{item.name}}
+        </view>
+      </scroll-view>
+      <scroll-view class="VerticalMain" scroll-y scroll-with-animation
+       style="height:calc(100vh - 375rpx);" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+        <view class="padding-top padding-lr" wx:for="{{list}}" wx:key="item" id="main-{{index}}">
+          <view class='cu-bar solid-bottom bg-white'>
+            <view class='action'>
+              <text class='cuIcon-title text-green'></text> Tab-{{item.name}} </view>
+          </view>
+          <view class="cu-list menu-avatar">
+            <view class="cu-item">
+              <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+              <view class="content">
+                <view class="text-grey">凯尔</view>
+                <view class="text-gray text-sm flex">
+                  <text class="text-cut">
+										<text class="cuIcon-infofill text-red  margin-right-xs"></text> 我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。
+                  </text>
+                </view>
+              </view>
+              <view class="action">
+                <view class="text-grey text-xs">22:20</view>
+                <view class="cu-tag round bg-grey sm">5</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+</view>
+    </swiper-item>
+    <swiper-item>
+      <view class="location_bottom" hidden="">
+        <view class="{{arrange == 1?'add_pirceing':'add_pirce'}}" data-num="1" bindtap="clickNum" data-name="0~1000">0~1000</view>
+        <view class="{{arrange == 2?'add_pirceing':'add_pirce'}}" data-num="2" bindtap="clickNum" data-name="1000~5000">1000~5000</view>
+        <view class="{{arrange == 3?'add_pirceing':'add_pirce'}}" data-num="3" bindtap="clickNum" data-name="5000~10000">5000~10000</view>
+        <view class="{{arrange == 4?'add_pirceing':'add_pirce'}}" data-num="4" bindtap="clickNum" data-name="10000以上">10000以上</view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="location_bottom" hidden="">
+        <view class="{{time == 1?'add_priceing':'add_pirce'}}" data-num="1" bindtap="clickTime" data-name="30秒">30秒</view>
+        <view class="{{time == 2?'add_priceing':'add_pirce'}}" data-num="2" bindtap="clickTime" data-name="60秒">60秒</view>
+        <view class="{{time == 3?'add_priceing':'add_pirce'}}" data-num="3" bindtap="clickTime" data-name="2分钟">1分钟</view>
+        <view class="{{time == 4?'add_priceing':'add_pirce'}}" data-num="4" bindtap="clickTime" data-name="2分钟以上">2分钟以上</view>
+        
+      </view>
+    </swiper-item>
+    <swiper-item class="shaixuankuang">
+      <view class="shaixuan" >
+        <span class="shuaixuantiaojian  text-lg text-black padding-xs">性别</span>
+        <block wx:for="{{array}}" wx:key="key">
+          <view class="chose-txt" data-id="{{index}}" bindtap="choseGender" style="">
+            <view class="cu-tag customer-tag text-lg {{index == genderIndex ? 'text-orange':'text-grey'}} ">{{item.name}}</view>
+         
+          </view>
+        </block>
+       
+      </view>
+     
+      <view class="shaixuan">
+        <span class="shuaixuantiaojian text-lg text-black padding-xs">区域</span>
+        <block wx:for="{{area}}" wx:key="key">
+          <view class="chose-txt" data-id="{{index}}" bindtap="choseArea" >
+             <view class="cu-tag customer-tag text-lg {{index == areaIndex ? 'text-orange':'text-grey'}} ">{{item.name}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="qingkong">
+        <view bindtap="reset" class="flex  reset ">重置</view>
+        <view  bindtap="handleSubmit" class="flex submit">确定</view>
+        <!-- <button bindtap="reset" style="margin-left:10px" class="cu-btn bg-redlg lg fl">清除</button>
+        <button bindtap="handleSubmit" style="margin-right:10px" class="cu-btn bg-blue lg fr">确认</button> -->
+      </view>
+    </swiper-item>
+  </swiper>
+</view>
+
+<view class="swiper-beijing" bindtap="hideNav" style='display:{{displays}}'></view>
